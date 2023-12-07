@@ -1,0 +1,42 @@
+{
+	"manifest_version": 3,
+	"name": "Feed Remover",
+	"version": "1.0",
+	"description": "Replace your LinkedIn Feed with a cute cat.",
+	"icons": {
+		"48": "icons/icon.png"
+	},
+	"action": {
+		"default_title": "Feed Remover",
+		"default_popup": "popup/popup.html"
+	},
+	"content_scripts": [
+		{
+			"matches": [
+				"*://*.linkedin.com/*"
+			],
+			"js": [
+				"content_scripts/main.js"
+			]
+		}
+	],
+	"background": {
+		"scripts": [
+			"service_worker/background.js"
+		]
+	},
+	"permissions": [
+		"activeTab",
+		"scripting",
+		"storage"
+	],
+	"commands": {
+		"toggle-feature": {
+			"suggested_key": {
+				"default": "Ctrl+Shift+Y",
+				"linux": "Ctrl+Shift+U"
+			},
+			"description": "Show/hide feed."
+		}
+	}
+}

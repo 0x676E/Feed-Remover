@@ -1,0 +1,104 @@
+html,
+body {
+	margin: 0;
+	width: 200px;
+	color: white;
+	background-color: #121212;
+	text-align: center;
+}
+
+a {
+	color: inherit;
+	text-decoration: inherit;
+}
+
+* {
+	user-select: none;
+	font-family: 'Stint Ultra Expanded';
+	font-style: normal;
+	font-weight: 400;
+	src: url('../fonts/Roboto-Regular.ttf') format('ttf');
+}
+
+.hidden {
+	display: none !important;
+}
+
+.container {
+	display: flex;
+	flex-direction: column;
+}
+
+.content {
+	margin: 1.2rem;
+}
+
+.main-icon {
+	width: 2rem;
+	height: 2rem;
+	margin-bottom: 0.5rem;
+}
+
+.popup-title {
+	font-size: 1.5em;
+	font-weight: bold;
+}
+
+.toggle-button {
+	height: 7rem;
+	width: 100%;
+	margin-top: 1rem;
+	cursor: pointer;
+	fill: transparent;
+	stroke-width: 10px;
+	stroke: rgb(163, 163, 163);
+	overflow: visible
+}
+
+.toggle-button:hover * {
+	stroke: rgb(128, 128, 128);
+}
+
+.toggle-button.active:hover * {
+	fill: rgb(0, 95, 0);
+	stroke: rgb(0, 95, 0);
+}
+
+.active {
+	font-weight: bold;
+	color: green;
+	fill: green;
+	stroke: green;
+}
+
+.tip-info {
+	margin-top: 0.5rem;
+	font-size: 0.8rem;
+	color: #9e9e9e;
+}
+
+.d-block {
+	display: block;
+}
+
+.error {
+	margin-top: 1rem;
+	color: red;
+}
+
+.footer {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: #1d1d1d;
+}
+
+.footer>.items {
+	color: white;
+	padding: 0.5rem;
+	font-size: 1rem;
+}
+
+.items:hover {
+	text-decoration: underline;
+}
