@@ -25,11 +25,9 @@ interface UserOption {
 
 	function showContent(): void {
 		window.location.reload();
-		document.body.style.border = "5px solid blue";
 	}
 
 	function hideContent(): void {
-		document.body.style.border = "5px solid red";
 		if (firstTime) {
 			removeContent();
 			firstTime = false;

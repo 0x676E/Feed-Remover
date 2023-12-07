@@ -12,7 +12,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     return __awaiter(this, void 0, void 0, function* () {
         let firstTime = true;
         let userOption = yield browser.storage.local.get("hide");
-        //Create Type for userOption and message
         if (!Object.prototype.hasOwnProperty.call(userOption, "hide")) {
             yield browser.storage.local.set({ "hide": true });
             userOption = (yield browser.storage.local.get("hide"));
@@ -28,10 +27,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         });
         function showContent() {
             window.location.reload();
-            document.body.style.border = "5px solid blue";
         }
         function hideContent() {
-            document.body.style.border = "5px solid red";
             if (firstTime) {
                 removeContent();
                 firstTime = false;
