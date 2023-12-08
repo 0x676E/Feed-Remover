@@ -1,12 +1,10 @@
 {
-	"manifest_version": 3,
+	"manifest_version": 2,
 	"name": "Feed Remover",
 	"version": "1.0",
 	"description": "Replace your LinkedIn Feed with a cute cat.",
-	"icons": {
-		"48": "icons/icon.png"
-	},
-	"action": {
+	"browser_action": {
+		"default_icon": "icons/icon.png",
 		"default_title": "Feed Remover",
 		"default_popup": "popup/popup.html"
 	},
