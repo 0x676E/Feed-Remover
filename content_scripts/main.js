@@ -11,13 +11,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 (function () {
     return __awaiter(this, void 0, void 0, function* () {
         let firstTime = true;
-        let userOption = yield browser.storage.local.get("hide");
+        let userOption = yield chrome.storage.local.get("hide");
         if (!Object.prototype.hasOwnProperty.call(userOption, "hide")) {
-            yield browser.storage.local.set({ "hide": true });
-            userOption = (yield browser.storage.local.get("hide"));
+            yield chrome.storage.local.set({ "hide": true });
+            userOption = (yield chrome.storage.local.get("hide"));
         }
         userOption.hide && hideContent();
-        browser.runtime.onMessage.addListener((message) => {
+        chrome.runtime.onMessage.addListener((message) => {
             if (message.action) {
                 hideContent();
             }

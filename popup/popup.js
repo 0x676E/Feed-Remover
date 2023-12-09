@@ -8,7 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-browser.tabs
+chrome.tabs
     .query({
     currentWindow: true,
     active: true,
@@ -27,13 +27,13 @@ const toggleButton = document.querySelector(".toggle-button");
 toggleButton.addEventListener("click", userAction);
 function userAction() {
     return __awaiter(this, void 0, void 0, function* () {
-        const toggle = (yield browser.storage.local.get("hide"));
+        const toggle = (yield chrome.storage.local.get("hide"));
         toggle.hide = !toggle.hide;
-        yield browser.storage.local.set({ "hide": toggle.hide });
+        yield chrome.storage.local.set({ "hide": toggle.hide });
         const message = {
             action: toggle.hide,
         };
-        browser.tabs
+        chrome.tabs
             .query({
             currentWindow: true,
             active: true,
@@ -49,10 +49,10 @@ function sendMessageToScript(tabs, message) {
     return __awaiter(this, void 0, void 0, function* () {
         if (tabs[0].id) {
             try {
-                yield browser.tabs.sendMessage(tabs[0].id, message);
+                yield chrome.tabs.sendMessage(tabs[0].id, message);
             }
             catch (error) {
-                if (browser.runtime.lastError) {
+                if (chrome.runtime.lastError) {
                     handleError(error);
                 }
             }
@@ -61,7 +61,7 @@ function sendMessageToScript(tabs, message) {
 }
 function checkButtonState() {
     return __awaiter(this, void 0, void 0, function* () {
-        const buttonState = yield browser.storage.local.get("hide");
+        const buttonState = yield chrome.storage.local.get("hide");
         if (buttonState.hide) {
             toggleButton.classList.add("active");
         }

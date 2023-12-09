@@ -5,16 +5,16 @@ interface UserOption {
 (async function (): Promise<void> {
 	let firstTime: boolean = true;
 
-	let userOption = await browser.storage.local.get("hide") as UserOption;
+	let userOption = await chrome.storage.local.get("hide") as UserOption;
 
 	if (!Object.prototype.hasOwnProperty.call(userOption, "hide")) {
-		await browser.storage.local.set({ "hide": true });
-		userOption = await browser.storage.local.get("hide") as UserOption;
+		await chrome.storage.local.set({ "hide": true });
+		userOption = await chrome.storage.local.get("hide") as UserOption;
 	}
 
 	userOption.hide && hideContent();
 
-	browser.runtime.onMessage.addListener((message: Message) => {
+	chrome.runtime.onMessage.addListener((message: Message) => {
 		if (message.action) {
 			hideContent();
 		}

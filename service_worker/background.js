@@ -12,7 +12,7 @@ function sendMessageToTabs(tabs, message) {
     return __awaiter(this, void 0, void 0, function* () {
         if (tabs[0].id !== undefined) {
             try {
-                yield browser.tabs.sendMessage(tabs[0].id, message);
+                yield chrome.tabs.sendMessage(tabs[0].id, message);
             }
             catch (error) {
                 console.log(`Error: ${error}`);
@@ -20,18 +20,18 @@ function sendMessageToTabs(tabs, message) {
         }
     });
 }
-browser.runtime.onInstalled.addListener(() => __awaiter(void 0, void 0, void 0, function* () {
-    yield browser.storage.local.set({ "hide": true });
+chrome.runtime.onInstalled.addListener(() => __awaiter(void 0, void 0, void 0, function* () {
+    yield chrome.storage.local.set({ "hide": true });
 }));
-browser.commands.onCommand.addListener((command) => __awaiter(void 0, void 0, void 0, function* () {
+chrome.commands.onCommand.addListener((command) => __awaiter(void 0, void 0, void 0, function* () {
     if (command === "toggle-feature") {
-        let toggle = yield browser.storage.local.get("hide");
+        let toggle = yield chrome.storage.local.get("hide");
         toggle = { hide: !toggle.hide };
-        yield browser.storage.local.set({ "hide": toggle.hide });
+        yield chrome.storage.local.set({ "hide": toggle.hide });
         const message = {
             action: toggle.hide || false
         };
-        browser.tabs
+        chrome.tabs
             .query({
             currentWindow: true,
             active: true,
