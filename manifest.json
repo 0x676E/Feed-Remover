@@ -27,7 +27,6 @@
 	},
 	"permissions": [
 		"activeTab",
-		"scripting",
 		"storage"
 	],
 	"commands": {
