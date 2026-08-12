@@ -88,17 +88,158 @@ a {
 
 .footer {
 	display: flex;
-	justify-content: center;
+	flex-direction: column;
 	align-items: center;
 	background-color: #1d1d1d;
+	gap: 0.15rem;
+	padding: 0.35rem 0;
 }
 
-.footer>.items {
-	color: white;
-	padding: 0.5rem;
-	font-size: 1rem;
+.footer .items {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
 }
 
-.items:hover {
+.footer .items a {
+	color: #ffffff;
+	font-size: 0.95rem;
+}
+
+.footer .items span {
+	color: #b5b5b5;
+	font-size: 0.78rem;
+}
+
+.footer .note {
+	position: relative;
+	margin-top: 0.15rem;
+	padding-top: 0.25rem;
+}
+
+.footer .note::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 32px;
+	height: 1px;
+	background: rgba(255, 255, 255, 0.12);
+}
+
+.items:hover a {
 	text-decoration: underline;
+}
+
+.category-switch {
+	display: flex;
+	margin-top: 0.8rem;
+	border: 1px solid rgb(163, 163, 163);
+	border-radius: 6px;
+	overflow: hidden;
+}
+
+.category-button {
+	flex: 1;
+	padding: 0.4rem 0;
+	background: transparent;
+	border: none;
+	color: rgb(163, 163, 163);
+	font-size: 0.75rem;
+	cursor: pointer;
+}
+
+.category-button:not(:last-child) {
+	border-right: 1px solid rgb(163, 163, 163);
+}
+
+.category-button:hover {
+	color: rgb(128, 128, 128);
+}
+
+.category-button.active {
+	background-color: green;
+	color: white;
+	font-weight: bold;
+}
+
+.category-button:disabled {
+	color: rgb(80, 80, 80);
+	cursor: not-allowed;
+}
+
+.category-button:disabled:hover {
+	color: rgb(80, 80, 80);
+}
+
+.switch-row {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: 0.8rem;
+	padding: 0.4rem 0.6rem;
+	border: 1px solid rgb(163, 163, 163);
+	border-radius: 6px;
+	font-size: 0.75rem;
+	color: rgb(163, 163, 163);
+	cursor: pointer;
+}
+
+.switch-label {
+	pointer-events: none;
+}
+
+.switch {
+	position: relative;
+	display: inline-block;
+	width: 2.2rem;
+	height: 1.2rem;
+	flex-shrink: 0;
+}
+
+.switch input {
+	position: absolute;
+	inset: 0;
+	margin: 0;
+	opacity: 0;
+	cursor: pointer;
+	z-index: 1;
+}
+
+.switch-track {
+	position: absolute;
+	inset: 0;
+	background-color: rgb(80, 80, 80);
+	border-radius: 999px;
+	transition: background-color 0.15s ease-in-out;
+}
+
+.switch-thumb {
+	position: absolute;
+	top: 0.15rem;
+	left: 0.15rem;
+	width: 0.9rem;
+	height: 0.9rem;
+	background-color: white;
+	border-radius: 50%;
+	transition: transform 0.15s ease-in-out;
+}
+
+.switch input:checked ~ .switch-track {
+	background-color: green;
+}
+
+.switch input:checked ~ .switch-track > .switch-thumb {
+	transform: translateX(1rem);
+}
+
+.switch input:disabled ~ .switch-track {
+	background-color: rgb(60, 60, 60);
+	cursor: not-allowed;
+}
+
+.switch-row:has(input:disabled) {
+	color: rgb(80, 80, 80);
+	cursor: not-allowed;
 }

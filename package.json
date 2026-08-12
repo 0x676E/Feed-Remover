@@ -1,4 +1,8 @@
 {
+  "scripts": {
+    "build": "tsc",
+    "generate:images": "node scripts/generate-images.js"
+  },
   "dependencies": {
     "@types/firefox-webext-browser": "^120.0.0"
   },
