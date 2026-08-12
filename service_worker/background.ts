@@ -1,4 +1,4 @@
-async function sendMessageToTabs(tabs: browser.tabs.Tab[], message: Message): Promise<void> {
+async function sendMessageToTabs(tabs: any[], message: Message): Promise<void> {
 	if (tabs[0].id !== undefined) {
 		try {
 			await browser.tabs.sendMessage(tabs[0].id, message);
@@ -30,6 +30,6 @@ browser.commands.onCommand.addListener(async (command: string): Promise<void> =>
 				currentWindow: true,
 				active: true,
 			})
-			.then((result: browser.tabs.Tab[]) => sendMessageToTabs(result, message));
+			.then((result: any[]) => sendMessageToTabs(result, message));
 	}
 });

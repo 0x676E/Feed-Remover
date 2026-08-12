@@ -68,9 +68,78 @@ function checkButtonState() {
         else {
             toggleButton.classList.remove("active");
         }
+        categoryButtons.forEach((button) => {
+            button.disabled = !buttonState.hide;
+        });
+        infiniteScrollCheckbox.disabled = !buttonState.hide;
     });
 }
 function handleError(error) {
     console.log(`Error: ${error}`);
 }
+const categoryButtons = document.querySelectorAll(".category-button");
+categoryButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+        const category = button.dataset.category;
+        categoryAction(category);
+    });
+});
+function categoryAction(category) {
+    return __awaiter(this, void 0, void 0, function* () {
+        yield browser.storage.local.set({ imageCategory: category });
+        checkCategoryState();
+        browser.tabs
+            .query({
+            currentWindow: true,
+            active: true,
+        })
+            .then((result) => {
+            if (result[0].id !== undefined) {
+                browser.tabs.reload(result[0].id);
+            }
+        })
+            .catch(handleError);
+    });
+}
+function checkCategoryState() {
+    var _a;
+    return __awaiter(this, void 0, void 0, function* () {
+        const stored = yield browser.storage.local.get("imageCategory");
+        const current = (_a = stored.imageCategory) !== null && _a !== void 0 ? _a : "both";
+        categoryButtons.forEach((button) => {
+            button.classList.toggle("active", button.dataset.category === current);
+        });
+    });
+}
+const infiniteScrollCheckbox = document.querySelector(".infinite-scroll-checkbox");
+infiniteScrollCheckbox.addEventListener("change", () => {
+    // singlePostMode is the inverse of the "Infinite Scroll" switch: checked (on)
+    // means infinite scroll, unchecked (off) means single-post mode.
+    infiniteScrollAction(!infiniteScrollCheckbox.checked);
+});
+function infiniteScrollAction(singlePostMode) {
+    return __awaiter(this, void 0, void 0, function* () {
+        yield browser.storage.local.set({ singlePostMode });
+        browser.tabs
+            .query({
+            currentWindow: true,
+            active: true,
+        })
+            .then((result) => {
+            if (result[0].id !== undefined) {
+                browser.tabs.reload(result[0].id);
+            }
+        })
+            .catch(handleError);
+    });
+}
+function checkInfiniteScrollState() {
+    var _a;
+    return __awaiter(this, void 0, void 0, function* () {
+        const stored = yield browser.storage.local.get("singlePostMode");
+        infiniteScrollCheckbox.checked = !((_a = stored.singlePostMode) !== null && _a !== void 0 ? _a : false);
+    });
+}
 checkButtonState();
+checkCategoryState();
+checkInfiniteScrollState();
